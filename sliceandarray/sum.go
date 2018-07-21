@@ -22,8 +22,12 @@ func SumAll(numbersToSum ...[]int) (sums []int) {
 // SumAllTails return all sum of every slice of numbers except first number
 func SumAllTails(numbersToSumTails ...[]int) (sums []int) {
 	for _, numbers := range numbersToSumTails {
-		tail := numbers[1:]
-		sums = append(sums, Sum(tail))
+		if len(numbers) == 0 {
+			sums = append(sums, 0)
+		} else {
+			tail := numbers[1:]
+			sums = append(sums, Sum(tail))
+		}
 	}
 	return
 }
