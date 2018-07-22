@@ -26,6 +26,22 @@ func (c *ConfigurableSleeper) Sleep() {
 	time.Sleep(c.duration)
 }
 
+type CountdownOperationSpy struct {
+	Calls []string
+}
+
+func (s *CountdownOperationSpy) Sleep() {
+	s.Calls = append(s.Calls, sleep)
+}
+
+func (s *CountdownOperationSpy) Write(p []byte) (n int, err error) {
+	s.Calls = append(s.Calls, write)
+	return
+}
+
+const sleep = "sleep"
+const write = "write"
+
 const finalWord = "Go!"
 const CountdownStart = 3
 
